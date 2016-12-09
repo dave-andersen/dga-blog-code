@@ -1,2 +1,2 @@
 # dga-blog-code
-Code used in blog posts
+Code used in Dave's blog posts.
