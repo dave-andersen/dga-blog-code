@@ -23,7 +23,7 @@ constexpr int NUM_TAGS = 4;
 
 inline void SortPair(uint32_t& a, uint32_t& b) {
   if ((a & 0x0f) > (b & 0x0f)) {
-    uint32_t tmp = a; a = b; b = tmp;
+    std::swap(a, b);
   }
 }
 
