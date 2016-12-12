@@ -21,18 +21,18 @@ constexpr int NUM_TAGS = 4;
 // this to discourage the compiler from optimizing away all of this
 // useless work.
 
-inline void comparator(uint32_t& a, uint32_t& b) {
+inline void SortPair(uint32_t& a, uint32_t& b) {
   if ((a & 0x0f) > (b & 0x0f)) {
     uint32_t tmp = a; a = b; b = tmp;
   }
 }
 
 inline int32_t SortTags(uint32_t tags[4]) {
-  comparator(tags[0], tags[2]);
-  comparator(tags[1], tags[3]);
-  comparator(tags[0], tags[1]);
-  comparator(tags[2], tags[3]);
-  comparator(tags[1], tags[2]);
+  SortPair(tags[0], tags[2]);
+  SortPair(tags[1], tags[3]);
+  SortPair(tags[0], tags[1]);
+  SortPair(tags[2], tags[3]);
+  SortPair(tags[1], tags[2]);
   return tags[3];
 }
 
