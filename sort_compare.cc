@@ -11,7 +11,7 @@
 #include <algorithm>
 #include <iterator>
 
-constexpr int WARMUP_ITERS = 1000;
+constexpr int WARMUP_ITERS = 2000;
 constexpr int EVAL_ITERS = 200000000;
 constexpr int NUM_TAGS = 4;
 
@@ -52,7 +52,6 @@ inline int32_t STLSortTags(uint32_t (&tags)[4]) {
 uint64_t state = 1234567u;
 
 inline void randomizeTags(uint32_t tags[NUM_TAGS]) {
-  uint64_t old = state;
   tags[0] = state >> 4;
   tags[1] = state >> 16;
   tags[2] = state >> 24;
