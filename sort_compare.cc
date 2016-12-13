@@ -46,18 +46,18 @@ inline int32_t STLSortTags(uint32_t (&tags)[4]) {
 
 // Quick hack LCRNG to seed tags.  We seed the tags randomly each
 // time so that the benchmark isn't getting excess benefit from
-// the branch predictor, which might change the results.
+// the branch predictor, which might change the results.  This
+// isn't designed to be strong, it's designed to be fast and
+// just good enough that the compiler doesn't invalidate our results.
 uint64_t state = 1234567u;
-inline uint32_t nextrand() {
-  uint64_t old = state;
-  state = state * 6364136223846793005ULL + 7;
-  return (uint32_t) (old >> 32);
-}
 
 inline void randomizeTags(uint32_t tags[NUM_TAGS]) {
-  for (int i = 0; i < NUM_TAGS; i++) {
-    tags[i] = nextrand();
-  }
+  uint64_t old = state;
+  tags[0] = state >> 4;
+  tags[1] = state >> 16;
+  tags[2] = state >> 24;
+  tags[3] = state >> 32;
+  state = state * 6364136223846793005ULL + 7;
 }
 
 void print_timing(const struct timeval *tv_start, const struct timeval *tv_end,
